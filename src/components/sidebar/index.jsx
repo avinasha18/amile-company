@@ -76,14 +76,14 @@ const Sidebar = () => {
             icon={PostAddIcon}
             isDarkMode={isDarkMode}
             label="view jobs"
-            to="/"
+            to="/viewjobs"
             isCollapsed={isCollapsed}
           />
           <SidebarItem
             icon={GoVerified}
             isDarkMode={isDarkMode}
             label="Post New Job"
-            to="/government"
+            to="/postjob"
             isCollapsed={isCollapsed}
           />
         </SidebarSection>

@@ -2,10 +2,14 @@ import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 
 import Navbar from "../navbar";
 // import Messages from "../Messages";
-import CompanyChatStart from "../../pages/chatmessages"
+import CompanyChatStart from "../../pages/chatmessages";
 import Sidebar from "../sidebar";
 import ProfilePage from "../../pages/profile";
 import PageNotFound from "../pageNotFound";
+import PostNewJob from "../../pages/postjob";
+import MyJobPosts from "../../pages/myjobposts";
+import JobDetailPage from "../JobDetailPage"
+import JobApplications from "../../pages/applications";
 
 export const RouteManagement = ({ islogin }) => {
   const location = useLocation(window.location);
@@ -30,7 +34,7 @@ export const RouteManagement = ({ islogin }) => {
             path="/messages"
             element={
               <ProtectedRoute isLogin={islogin} nextPath={location.pathname}>
-<CompanyChatStart />
+                <CompanyChatStart />
               </ProtectedRoute>
             }
           />
@@ -43,8 +47,39 @@ export const RouteManagement = ({ islogin }) => {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/postjob"
+            element={
+              <ProtectedRoute isLogin={islogin} nextPath={location.pathname}>
+                <PostNewJob />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/viewjobs"
+            element={
+              <ProtectedRoute isLogin={islogin} nextPath={location.pathname}>
+                <MyJobPosts />
+              </ProtectedRoute>
+            }
+          />
+            <Route
+            path="/jobdetail"
+            element={
+              <ProtectedRoute isLogin={islogin} nextPath={location.pathname}>
+                <JobDetailPage />
+              </ProtectedRoute>
+            }
+          />
+              <Route
+            path="/applied"
+            element={
+              <ProtectedRoute isLogin={islogin} nextPath={location.pathname}>
+                <JobApplications />
+              </ProtectedRoute>
+            }
+          />
 
-    
           <Route path="/*" element={<PageNotFound />} />
         </Routes>
       </div>

@@ -30,6 +30,28 @@ export const Actions = {
         return await axios.post(api+"/companies/reportincident",{...data});
 
     },
+    postInternship: async (data) => {
+        return await axios.post(api+"/companies/internships",{...data});
+    },
+    getInternships: async () => {
+        return await axios.get(api+"/companies/internships");
+
+    },
+    getJobApplications: async () => {
+       return await axios.get(api+"/companies/applications");
+    },
+    acceptApplication: async (id) => {
+        return await axios.post(api+"/companies/applications/"+id,{status:"selected"});
+    },
+    rejectApplication: async (id) => {
+        return await axios.post(api+"/companies/applications/"+id, {status:"rejected"});
+
+    },
+    nextRound: async (id) => {
+            return await axios.post(api+"/companies/applications/"+id, {status:"next round"});
+    
+
+    }
 
 }
 

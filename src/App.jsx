@@ -10,10 +10,26 @@ import { ResendVerification } from "./pages/resendverify";
 import ReportIncident from "./pages/report"
 import { setAuthToken } from "./hooks/golbalAuth";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import socket from "./services/socket/socket";
 
 function App() {
   const islogin = useSelector((state) => state.auth.token);
   setAuthToken(islogin);
+  const { _id: userId } = useSelector((state) => state.auth.userDetails);
+
+  useEffect(() => {
+    if (userId) {
+      socket.on('connect', () => {
+        socket.emit('joinChat', { userId });
+        console.log(`Emitted joinChat for User ID: ${userId} on socket connect`);
+      });
+    }
+
+    return () => {
+      socket.off('connect'); 
+    };
+  }, [userId]);
   return (
     <>
       <BrowserRouter>
