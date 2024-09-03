@@ -10,6 +10,7 @@ const MyJobPosts = () => {
   const getMyJobPosts = async () => {
     try {
       const posts = await Actions.getInternships();
+      console.log(posts)
       setJobPosts(posts.data.data);
     } catch (error) {
       console.error('Error fetching job posts:', error);

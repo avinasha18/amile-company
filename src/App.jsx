@@ -10,26 +10,28 @@ import { ResendVerification } from "./pages/resendverify";
 import ReportIncident from "./pages/report"
 import { setAuthToken } from "./hooks/golbalAuth";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import socket from "./services/socket/socket";
 
 function App() {
   const islogin = useSelector((state) => state.auth.token);
   setAuthToken(islogin);
-  const { _id: userId } = useSelector((state) => state.auth.userDetails);
 
+
+  const userId = useSelector((state) => state.auth.userDetails?._id);
+  const memoizedUserId = useMemo(() => userId, [userId]);
   useEffect(() => {
-    if (userId) {
+    if (islogin) {
       socket.on('connect', () => {
-        socket.emit('joinChat', { userId });
-        console.log(`Emitted joinChat for User ID: ${userId} on socket connect`);
+        socket.emit('joinChat', { userId: memoizedUserId });
+        console.log(`Emitted joinChat for User ID: ${memoizedUserId} on socket connect`);
       });
     }
-
+  
     return () => {
-      socket.off('connect'); 
+      socket.off('connect');
     };
-  }, [userId]);
+  }, [islogin, memoizedUserId]);
   return (
     <>
       <BrowserRouter>

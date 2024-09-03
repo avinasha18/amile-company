@@ -10,11 +10,12 @@ const JobApplications = () => {
   const fetchJobApplications = async () => {
     try {
       const response = await Actions.getJobApplications();
-      setApplications(response.data.data);
+      setApplications(response.data);
     } catch (error) {
       console.error("Error fetching job applications:", error);
     }
   };
+  console.log(applications)
 
   const handleAccept = async (applicationId) => {
     try {
@@ -66,7 +67,7 @@ const JobApplications = () => {
     >
       <h2 className="text-2xl font-bold mb-6 text-center">Job Applications</h2>
       <ul className="space-y-4">
-        {applications.length > 0 ? (
+        {applications?.length > 0 ? (
           applications?.map((application) => (
             <li
               key={application._id}
