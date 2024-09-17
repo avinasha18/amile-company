@@ -15,7 +15,6 @@ const JobApplications = () => {
       console.error("Error fetching job applications:", error);
     }
   };
-  console.log(applications)
 
   const handleAccept = async (applicationId) => {
     try {
@@ -61,7 +60,7 @@ const JobApplications = () => {
 
   return (
     <div
-      className={`w-screen mx-auto p-6 ${
+      className={`w-screen mx-auto p-6 overflow-auto no-scrollbar ${
         isDarkMode ? "bg-black text-white" : "bg-white text-black"
       }  card shadow-md`}
     >

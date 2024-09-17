@@ -1,5 +1,5 @@
 import { io } from "socket.io-client";
-import { api } from "../../hooks/apis";
+import { serverApi as api} from "../../hooks/apis";
 
 const socket = io(api);
 
